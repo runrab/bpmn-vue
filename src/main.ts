@@ -8,3 +8,8 @@ import hljsVuePlugin from '@highlightjs/vue-plugin'
 const app = createApp(App)
 app.use(hljsVuePlugin)
 app.mount('#app')
+
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
+    next();
+});

@@ -119,20 +119,19 @@ import {onMounted, reactive, Ref, ref, watch} from 'vue'
   }
 
 
+const curNodeInfo = reactive({
+  curType: "",  // 任务类型 用户任务
+  curNode: "",
+  expValue: "",//多用户和部门角色实现
+});
+watch(curNodeInfo, (newValue, oldValue) => {
+  // 在 curNodeInfo 对象发生变化后执行相应逻辑
+  // 这里调用 addEventPlant 函数来添加事件监听器
+  if (curNodeInfo.curNode != "") {
+    addEventPlant();
+  }
+});
   function handleModeler(){
-
-    const curNodeInfo = reactive({
-      curType: "",  // 任务类型 用户任务
-      curNode: "",
-      expValue: "",//多用户和部门角色实现
-    });
-    watch(curNodeInfo, (newValue, oldValue) => {
-      // 在 curNodeInfo 对象发生变化后执行相应逻辑
-      // 这里调用 addEventPlant 函数来添加事件监听器
-      if (curNodeInfo.curNode != "") {
-        addEventPlant();
-      }
-    });
     bpmnModeler.value.on("element.click", (e: {
       element: any
     }) => {
@@ -145,41 +144,24 @@ import {onMounted, reactive, Ref, ref, watch} from 'vue'
         curNodeInfo["curType"] = "";
         curNodeInfo["expValue"] = "";
       }
-      // if ("bpmn:SequenceFlow"=== e.element.type){
-      //   // console.log(e.element)
-      //   console.log(e.element.businessObject.sourceRef)
-      //   let source = e.element.businessObject.sourceRef;
-      //   if ("bpmn:ExclusiveGateway"===source.$type){
-      //     // 获得连线
-      //      let incomings=source.incoming;
-      //     console.log(incomings)
-      //     // let count=incomings.length;
-      //     incomings.forEach(obj=>{
-      //       console.log(obj.sourceRef)
-      //     });
-      //     // console.log(incomings[0].sourceRef)
-      //   }
-      // }
     });
-
-    function addEventPlant() {
-      let assigneeDiv = bpmnPanel.value.querySelector('[data-group-id="group-CamundaPlatform__UserAssignment"]') as HTMLDivElement;
-      if (assigneeDiv) {
-        assigneeDiv.addEventListener('click', function (e) {
-          let assigneeUser = assigneeDiv.getElementsByClassName('bio-properties-panel-input')[0] as HTMLButtonElement
-          assigneeUser.setAttribute('placeholder', '双击选择用户');
-          // dblclick 双击事件
-          assigneeUser.addEventListener('dblclick', onFormThreeClick);
-        })
-      }
-    }
-
-    function onFormThreeClick(){
-      alert("选择了用户")
-    }
   }
+function addEventPlant() {
+  let assigneeDiv = bpmnPanel.value.querySelector('[data-group-id="group-CamundaPlatform__UserAssignment"]') as HTMLDivElement;
+  if (assigneeDiv) {
+    assigneeDiv.addEventListener('click', function (e) {
+      let assigneeUser = assigneeDiv.getElementsByClassName('bio-properties-panel-input')[0] as HTMLButtonElement
+      assigneeUser.setAttribute('placeholder', '双击选择用户');
+      // dblclick 双击事件
+      assigneeUser.addEventListener('dblclick', onFormThreeClick);
+    })
+  }
+}
+function onFormThreeClick(){
+  alert("选择了用户")
+}
 
-  function getProcessName() {
+function getProcessName() {
     // 获得根节点下的业务对象 businessObject
     let rootElement = bpmnModeler.value.get("canvas").getRootElement();
     let {businessObject} = rootElement;
