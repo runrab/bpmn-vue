@@ -145,9 +145,12 @@ watch(curNodeInfo, (newValue, oldValue) => {
         curNodeInfo["expValue"] = "";
       }
     });
+
   }
 function addEventPlant() {
-  let assigneeDiv = bpmnPanel.value.querySelector('[data-group-id="group-CamundaPlatform__UserAssignment"]') as HTMLDivElement;
+  //  let assigneeDiv =  bpmnPanel.value.querySelector('[data-group-id="group-CamundaPlatform__UserAssignment"]') as HTMLDivElement;
+  //
+  let assigneeDiv =  document.querySelector('[data-group-id="group-CamundaPlatform__UserAssignment"]') as HTMLDivElement;
   if (assigneeDiv) {
     assigneeDiv.addEventListener('click', function (e) {
       let assigneeUser = assigneeDiv.getElementsByClassName('bio-properties-panel-input')[0] as HTMLButtonElement
