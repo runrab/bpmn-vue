@@ -27,9 +27,6 @@ import {onMounted, reactive, Ref, ref, watch} from 'vue'
   } from 'bpmn-js-properties-panel'
   import camundaModdleDescriptor from 'camunda-bpmn-moddle/resources/camunda.json'
   import axios from "axios";
-  import EnhancementPaletteProvider from './Palette'
-import EnhancementContextPad from './ContextPad'
-import modelerStore from '@/store/modeler'
 
   const bpmn: Ref<HTMLDivElement | null> = ref(null)
   const bpmnPanel: Ref<HTMLDivElement | null> = ref(null)
@@ -56,10 +53,6 @@ import modelerStore from '@/store/modeler'
         BpmnPropertiesPanelModule,
         BpmnPropertiesProviderModule,
         CamundaPlatformPropertiesProviderModule,
-        // 扩展左侧选择器
-        EnhancementPaletteProvider,
-        // 扩展节点右键
-        EnhancementContextPad,
         // CloudElementTemplatesPropertiesProviderModule,
         {
           translate: [ 'value', customTranslate ]
@@ -71,19 +64,7 @@ import modelerStore from '@/store/modeler'
     })
     createNewDiagram()
     handleModeler()
-    initModel()
   })
-
-
-async function initModel() {
-  let store = modelerStore()
-  if (store.getModeler) {
-    // 清除旧 modeler
-    store.getModeler.destroy()
-    store.setModeler(undefined)
-  }
-  store.setModeler(bpmnModeler.value)
-}
 
 
   // 文件上传
