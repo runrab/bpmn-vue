@@ -25,6 +25,9 @@ dependencies:
   diagram-js:
     specifier: ^12.3.0
     version: 12.3.0
+  didi:
+    specifier: ^9.0.2
+    version: 9.0.2
   element-plus:
     specifier: ^2.3.12
     version: 2.3.12(vue@3.3.4)
@@ -34,6 +37,12 @@ dependencies:
   highlight.js:
     specifier: ^11.8.0
     version: 11.8.0
+  min-dash:
+    specifier: ^4.1.1
+    version: 4.1.1
+  moddle:
+    specifier: ^6.2.3
+    version: 6.2.3
   pinia:
     specifier: ^2.1.6
     version: 2.1.6(typescript@5.2.2)(vue@3.3.4)

@@ -13,6 +13,7 @@
     "skipLibCheck": true,
     "noEmit": true,
     "baseUrl": "./",
+    "types": ["didi", "min-dash"],
     "paths": {
       "@/*": ["src/*"]
     }
