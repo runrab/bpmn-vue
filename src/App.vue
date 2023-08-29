@@ -1,9 +1,9 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import Bpmn from './components/bpmn.vue'
 </script>
 
 <template>
-  <Bpmn />
+  <Bpmn/>
 </template>
 
 <style scoped>
