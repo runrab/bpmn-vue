@@ -27,6 +27,9 @@ import {onMounted, reactive, Ref, ref, watch} from 'vue'
   } from 'bpmn-js-properties-panel'
   import camundaModdleDescriptor from 'camunda-bpmn-moddle/resources/camunda.json'
   import axios from "axios";
+  import EnhancementPaletteProvider from './Palette'
+import EnhancementContextPad from './ContextPad'
+import modelerStore from '@/store/modeler'
 
   const bpmn: Ref<HTMLDivElement | null> = ref(null)
   const bpmnPanel: Ref<HTMLDivElement | null> = ref(null)
@@ -53,6 +56,10 @@ import {onMounted, reactive, Ref, ref, watch} from 'vue'
         BpmnPropertiesPanelModule,
         BpmnPropertiesProviderModule,
         CamundaPlatformPropertiesProviderModule,
+        // 扩展左侧选择器
+        EnhancementPaletteProvider,
+        // 扩展节点右键
+        EnhancementContextPad,
         // CloudElementTemplatesPropertiesProviderModule,
         {
           translate: [ 'value', customTranslate ]
@@ -64,7 +71,19 @@ import {onMounted, reactive, Ref, ref, watch} from 'vue'
     })
     createNewDiagram()
     handleModeler()
+    initModel()
   })
+
+
+async function initModel() {
+  let store = modelerStore()
+  if (store.getModeler) {
+    // 清除旧 modeler
+    store.getModeler.destroy()
+    store.setModeler(undefined)
+  }
+  store.setModeler(bpmnModeler.value)
+}
 
 
   // 文件上传
@@ -238,29 +257,29 @@ function getProcessName() {
       <input ref="fileElement" type="file" style="display: none" @change="fileChange"/>
       <!--部署-->
       <el-button-group class="item download">
-        <el-button type="primary" @click="deployProcDefClick()">
+        <el-button type="success" @click="deployProcDefClick()">
           <a title="部署"><el-icon><SuccessFilled /></el-icon></a>
         </el-button>
       </el-button-group>
 
       <el-button-group class="item download">
-        <el-button type="primary" @click="upload()">
+        <el-button type="info" @click="upload()">
           <a title="上传文件"><el-icon><FolderAdd /></el-icon></a>
         </el-button>
-        <el-button type="primary" @click="newCreateDoc()">
+        <el-button type="info" @click="newCreateDoc()">
           <a title="新建"><el-icon><DocumentAdd /></el-icon></a>
         </el-button>
       </el-button-group>
       <el-button-group class="item download">
-        <el-button @click="downloadLinkClick()" type="primary" >
+        <el-button @click="downloadLinkClick()" type="info" >
           <a ref="downloadLinkEl" id="js-download-diagram" title="xml下载"><el-icon><Download /></el-icon></a>
         </el-button>
-        <el-button @click="downloadSvg" type="primary" >
+        <el-button @click="downloadSvg" type="info" >
           <a ref="downloadSvgEl" id="js-download-svg" title="svg下载"><el-icon><PictureFilled /></el-icon></a>
         </el-button>
       </el-button-group>
       <el-button-group class="item download">
-        <el-button type="primary" @click="perviewXML">
+        <el-button type="info" @click="perviewXML">
           <a title="xml预览"><el-icon><Document /></el-icon></a>
         </el-button>
         <el-button type="primary" @click="perviewSVG">
@@ -335,9 +354,24 @@ a {
 }
 </style>
 <style lang="scss">
-/*隐藏样式 必须设置在这里面*/
-/**
+/*隐藏 右上角样式 必须设置在这里面*/
+/*
 .bio-properties-panel-header {
   display: none;
 }*/
+
+/**覆盖面板样式*/
+.bio-properties-panel-group-header {
+  height: 40px;
+  width: 250px;
+}
+
+.bio-properties-panel-group-header .bio-properties-panel-group-header-title {
+  margin: 2px 15px 0;
+}
+
+.bio-properties-panel-input {
+  border-radius: 5px;
+  height: 30px;
+}
 </style>

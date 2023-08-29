@@ -17,6 +17,7 @@
     "camunda-bpmn-moddle": "^7.0.1",
     "element-plus": "^2.2.25",
     "highlight.js": "^11.7.0",
+    "pinia": "^2.1.6",
     "sass": "^1.56.1",
     "vue": "^3.2.41"
   },
