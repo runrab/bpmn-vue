@@ -78,23 +78,21 @@ class EhContextPadProvider extends ContextPadProvider {
         }
 
 
-        function appendMultiInstanceUserTask(event, element) {
-            const businessObject = this._bpmnFactory.create('bpmn:UserTask', {
-                name: '多实例用户任务',
+        const appendMultiInstanceUserTask = (event: Event, element: Shape) => {
+            let store=modeler()
+            let bpmnFactory = store.getModeler.get('bpmnFactory') as BpmnFactory;;
+            const businessObject = bpmnFactory.create('bpmn:UserTask', {
+                // name: '多实例用户任务',
                 isForCompensation: false,
             });
-
-            // 创建多实例属性并分配给用户任务的 loopCharacteristics
-            const multiInstanceLoopCharacteristics = this._bpmnFactory.create('bpmn:MultiInstanceLoopCharacteristics');
+            const multiInstanceLoopCharacteristics = bpmnFactory.create('bpmn:MultiInstanceLoopCharacteristics');
             businessObject.loopCharacteristics = multiInstanceLoopCharacteristics;
-
             // 创建 Shape
             const shape = this._elementFactory.createShape({
                 type: 'bpmn:UserTask',
                 businessObject: businessObject,
             });
-
-            this._create.start(event, shape, {source: element});
+            this._create.start(event, shape, { source: element });
         }
 
 

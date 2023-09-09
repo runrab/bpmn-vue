@@ -1,0 +1,97 @@
+/*隐藏样式 必须设置在这里面*/
+.bio-properties-panel-header {
+    display: none;
+}
+
+/**覆盖面板样式*/
+.bio-properties-panel-group-header {
+    height: 40px;
+    width: 250px;
+}
+
+.bio-properties-panel-group-header .bio-properties-panel-group-header-title {
+    margin: 2px 15px 0;
+}
+
+.bio-properties-panel-input {
+    border-radius: 5px;
+    height: 30px;
+}
+
+/*左侧样式 去除*/
+.entry.bpmn-icon-data-store {
+    display: none !important;
+}
+
+.entry.bpmn-icon-participant {
+    display: none !important;
+}
+
+.entry.bpmn-icon-group {
+    display: none !important;
+}
+
+.entry.bpmn-icon-data-object {
+    display: none !important;
+}
+
+.entry.bpmn-icon-lasso-tool {
+    display: none !important;
+}
+
+.entry.bpmn-icon-intermediate-event-none {
+    display: none !important;
+}
+
+.entry.bpmn-icon-subprocess-expanded {
+    display: none !important;
+}
+
+
+/**首页面板属性隐藏**/
+[data-group-id="group-CamundaPlatform__ExternalTask"] {
+    display: none !important;
+}
+
+[data-group-id="group-CamundaPlatform__JobExecution"] {
+    display: none !important;
+}
+
+[data-group-id="group-CamundaPlatform__CandidateStarter"] {
+    display: none !important;
+}
+
+/**任务列表**/
+[data-group-id="group-CamundaPlatform__Tasklist"] {
+    display: none !important;
+}
+
+/***用户任务节点隐藏***/
+[data-group-id="group-CamundaPlatform__ExtensionProperties"] {
+    display: none !important;
+}
+
+[data-group-id="group-CamundaPlatform__AsynchronousContinuations"] {
+    display: none !important;
+}
+
+[data-group-id="group-CamundaPlatform__Input"] {
+    display: none !important;
+}
+
+[data-group-id="group-CamundaPlatform__Tasklist"] {
+    display: none !important;
+}
+
+/**分配用户  多用户***/
+[data-group-id="group-CamundaPlatform__UserAssignment"] {
+    display: none !important;
+}
+
+[data-group-id="group-multiInstance"] {
+    display: none !important;
+}
+
+[data-group-id="group-CamundaPlatform__Form"] {
+    display: none !important;
+}
