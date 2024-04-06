@@ -3,12 +3,15 @@
 bpmn流程设计器示例
 
 ## bpmn-vue
+
 #### 介绍
+
 bpmn-js在vue中的基本使用，带右侧编辑栏
 
 vue3+vite+element-plus
 
 ### 效果预览
+
 https://bpmn-vue.vercel.app/
 
 #### 安装

@@ -1,7 +1,7 @@
 {
-  "name": "bpmn-vue",
-  "private": true,
-  "version": "0.1.0",
+  "name": "workflow-bpmn-vue",
+  "private": false,
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,30 +9,30 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@element-plus/icons-vue": "^2.1.0",
+    "@element-plus/icons-vue": "^2.3.1",
     "@highlightjs/vue-plugin": "^2.1.0",
-    "axios": "^1.5.0",
-    "bpmn-js": "^13.2.2",
-    "bpmn-js-properties-panel": "^2.1.0",
+    "axios": "^1.6.8",
+    "bpmn-js": "^17.2.1",
+    "bpmn-js-properties-panel": "^5.14.0",
     "bpmn-js-token-simulation": "^0.31.1",
     "camunda-bpmn-moddle": "^7.0.1",
-    "diagram-js": "^12.3.0",
-    "didi": "^9.0.2",
-    "element-plus": "^2.3.12",
+    "diagram-js": "^14.3.1",
+    "didi": "^10.2.2",
+    "element-plus": "^2.6.3",
     "element-resize-detector": "^1.2.4",
-    "highlight.js": "^11.8.0",
-    "min-dash": "^4.1.1",
-    "moddle": "^6.2.3",
-    "pinia": "^2.1.6",
-    "sass": "^1.66.1",
-    "tailwindcss": "^3.3.3",
-    "vue": "^3.3.4",
-    "vue-router": "^4.2.4"
+    "highlight.js": "^11.9.0",
+    "min-dash": "^4.2.1",
+    "moddle": "^7.0.0",
+    "pinia": "^2.1.7",
+    "sass": "^1.74.1",
+    "tailwindcss": "^3.4.3",
+    "vue": "^3.4.21",
+    "vue-router": "^4.3.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^4.3.3",
-    "typescript": "^5.2.2",
-    "vite": "4.4.9",
-    "vue-tsc": "^1.8.8"
+    "@vitejs/plugin-vue": "^5.0.4",
+    "typescript": "^5.4.4",
+    "vite": "^5.2.8",
+    "vue-tsc": "^2.0.10"
   }
 }

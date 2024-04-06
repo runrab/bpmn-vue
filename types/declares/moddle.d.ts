@@ -1,267 +1,267 @@
 /************************************** 核心 Moddle 声明 *****************************************/
 declare module 'moddle' {
-  type UriOrPrefix = {
-    uri?: string
-    prefix?: string
-  }
+    type UriOrPrefix = {
+        uri?: string
+        prefix?: string
+    }
 
-  export class Element {
-    $instanceOf: typeof Moddle.prototype.hasType
+    export class Element {
+        $instanceOf: typeof Moddle.prototype.hasType
 
-    get(name: string): ReturnType<typeof Properties.prototype.get>
+        get(name: string): ReturnType<typeof Properties.prototype.get>
 
-    set(name: string, value: any): ReturnType<typeof Properties.prototype.set>
-  }
+        set(name: string, value: any): ReturnType<typeof Properties.prototype.set>
+    }
 
-  export class ModdleElement extends Element {
-    static $model: Moddle
-    static $descriptor: Descriptor
-    readonly $type: string
-    $attrs: Object | {}
+    export class ModdleElement extends Element {
+        static $model: Moddle
+        static $descriptor: Descriptor
+        readonly $type: string
+        $attrs: Object | {}
 
-    [field: string]: any
+        [field: string]: any
 
-    $parent: any;
+        $parent: any;
 
-    constructor(attrs: Object)
+        constructor(attrs: Object)
 
-    static hasType(element: ModdleElement, type?: string): boolean
-  }
+        static hasType(element: ModdleElement, type?: string): boolean
+    }
 
-  // Factory
-  export class Factory {
-    model: Moddle
-    properties: Properties
+    // Factory
+    export class Factory {
+        model: Moddle
+        properties: Properties
 
-    constructor(model: Moddle, properties: Properties)
+        constructor(model: Moddle, properties: Properties)
 
-    createType(descriptor: Descriptor): ModdleElement
-  }
+        createType(descriptor: Descriptor): ModdleElement
+    }
 
-  export type BuiltinsKeys = 'String' | 'Boolean' | 'Integer' | 'Real' | 'Element'
-  export type TypeConverters = {
-    [T in Exclude<BuiltinsKeys, 'Element'>]: (s: string) => string | boolean | number
-  }
-  /**
-   * Convert a type to its real representation
-   */
-  export type coerceType = <T extends Exclude<BuiltinsKeys, 'Element'>>(
-    type: T,
-    value: string
-  ) => ReturnType<TypeConverters[T]>
-
-  /**
-   * Return whether the given type is built-in
-   */
-  export function isBuiltIn(type: BuiltinsKeys): boolean
-
-  /**
-   * Return whether the given type is simple
-   */
-  export function isSimple(type: Exclude<BuiltinsKeys, 'Element'>): boolean
-
-  type ParsedName = {
-    name: string
-    prefix: string
-    localName: string
-  }
-
-  /**
-   * Parses a namespaced attribute name of the form (ns:)localName to an object,
-   * given a default prefix to assume in case no explicit namespace is given.
-   *
-   * @param {String} name
-   * @param {String} [defaultPrefix] the default prefix to take, if none is present.
-   *
-   * @return {ParsedName} the parsed name
-   */
-  export function parseName(name: string, defaultPrefix?: string): ParsedName
-
-  // DescriptorBuilder
-  type Property = {
-    ns: ParsedName
-    name: ParsedName['name']
-    isId?: boolean
-    isBody?: boolean
-  }
-  type DescriptorType = {
-    name: string
-    properties: Property[]
-    superClass?: string[]
-    extends?: string[]
-    meta?: Object | {}
-  }
-  type Descriptor = {
-    ns: ParsedName
-    name: ParsedName['name']
-    allTypes: DescriptorType[]
-    allTypesByName: Record<string, DescriptorType[]>
-    properties: Property[]
-    propertiesByName: Record<string, Property[]>
-
-    bodyProperty?: Property
-    idProperty?: Property
-  }
-
-  export class DescriptorBuilder implements Descriptor {
-    ns: ParsedName
-    name: ParsedName['name']
-    allTypes: DescriptorType[]
-    allTypesByName: Record<string, DescriptorType[]>
-    properties: Property[]
-    propertiesByName: Record<string, Property[]>
-    bodyProperty?: Property
-    idProperty?: Property
-
-    constructor(nameNs: ParsedName)
-
-    build(): Descriptor
-
-    addProperty(p: Property, idx?: number, validate?: boolean): void
-
-    replaceProperty(oldProperty: Property, newProperty: Property, replace?: boolean): void | never
-
-    redefineProperty(
-      p: Property,
-      targetPropertyName: `${string}#${string}`,
-      replace?: boolean
-    ): void | never
-
-    addNamedProperty(p: Property, validate?: boolean): void | never
-
-    removeNamedProperty(p: Property): void
-
-    setBodyProperty(p: Property, validate?: boolean): void | never
-
-    setIdProperty(p: Property, validate?: boolean): void | never
-
-    assertNotDefined(p: Property, name?: string): void | never
-
-    hasProperty(name: string): Property | undefined
-
-    addTrait(t: DescriptorType, inherited: boolean): void
-  }
-
-  // Registry
-  export interface Package {
-    name: string
-    prefix: string
-    types: DescriptorType[]
-  }
-
-  export class Registry {
-    packageMap: Record<string, Package>
-    typeMap: Record<string, DescriptorType>
-    packages: Package[]
-    properties: Properties
-
-    constructor(packages: Package[], properties: Properties)
-
-    getPackage(uriOrPrefix: UriOrPrefix): Package
-
-    getPackages(): Package[]
-
-    registerPackage(pkg: Package): number
-
+    export type BuiltinsKeys = 'String' | 'Boolean' | 'Integer' | 'Real' | 'Element'
+    export type TypeConverters = {
+        [T in Exclude<BuiltinsKeys, 'Element'>]: (s: string) => string | boolean | number
+    }
     /**
-     * Register a type from a specific package with us
-     * @param {DescriptorType} type
-     * @param {Package} pkg
+     * Convert a type to its real representation
      */
-    registerType(type: DescriptorType, pkg: Package): void
+    export type coerceType = <T extends Exclude<BuiltinsKeys, 'Element'>>(
+        type: T,
+        value: string
+    ) => ReturnType<TypeConverters[T]>
 
     /**
-     * Traverse the type hierarchy from bottom to top,
-     * calling iterator with (type, inherited) for all elements in
-     * the inheritance chain.
+     * Return whether the given type is built-in
+     */
+    export function isBuiltIn(type: BuiltinsKeys): boolean
+
+    /**
+     * Return whether the given type is simple
+     */
+    export function isSimple(type: Exclude<BuiltinsKeys, 'Element'>): boolean
+
+    type ParsedName = {
+        name: string
+        prefix: string
+        localName: string
+    }
+
+    /**
+     * Parses a namespaced attribute name of the form (ns:)localName to an object,
+     * given a default prefix to assume in case no explicit namespace is given.
      *
-     * @param {Object} nsName
-     * @param {Function} iterator
-     * @param {Boolean} [trait=false]
-     */
-    mapTypes(nsName: Object, iterator: Function, trait?: boolean)
-
-    /**
-     * Returns the effective descriptor for a type.
+     * @param {String} name
+     * @param {String} [defaultPrefix] the default prefix to take, if none is present.
      *
-     * @param  {String} name the namespaced name (ns:localName) of the type
-     *
-     * @return {Descriptor} the resulting effective descriptor
+     * @return {ParsedName} the parsed name
      */
-    getEffectiveDescriptor(name: string): DescriptorBuilder
+    export function parseName(name: string, defaultPrefix?: string): ParsedName
 
-    definePackage(target: Descriptor, pkg: Package): void
-  }
+    // DescriptorBuilder
+    type Property = {
+        ns: ParsedName
+        name: ParsedName['name']
+        isId?: boolean
+        isBody?: boolean
+    }
+    type DescriptorType = {
+        name: string
+        properties: Property[]
+        superClass?: string[]
+        extends?: string[]
+        meta?: Object | {}
+    }
+    type Descriptor = {
+        ns: ParsedName
+        name: ParsedName['name']
+        allTypes: DescriptorType[]
+        allTypesByName: Record<string, DescriptorType[]>
+        properties: Property[]
+        propertiesByName: Record<string, Property[]>
 
-  //Properties
-  export class Properties {
-    model: Moddle
+        bodyProperty?: Property
+        idProperty?: Property
+    }
 
-    constructor(model: Moddle)
+    export class DescriptorBuilder implements Descriptor {
+        ns: ParsedName
+        name: ParsedName['name']
+        allTypes: DescriptorType[]
+        allTypesByName: Record<string, DescriptorType[]>
+        properties: Property[]
+        propertiesByName: Record<string, Property[]>
+        bodyProperty?: Property
+        idProperty?: Property
 
-    set(target: ModdleElement, name: string, value: any): void
+        constructor(nameNs: ParsedName)
 
-    get(target: ModdleElement, name: string): any
+        build(): Descriptor
 
-    define(target: ModdleElement, name: string, options: PropertyDescriptor): void
+        addProperty(p: Property, idx?: number, validate?: boolean): void
 
-    defineDescriptor(target: Omit<ModdleElement, '$descriptor'>, descriptor: Descriptor): void
+        replaceProperty(oldProperty: Property, newProperty: Property, replace?: boolean): void | never
 
-    defineModel(target: Omit<ModdleElement, '$model'>, model: ModdleElement): void
-  }
+        redefineProperty(
+            p: Property,
+            targetPropertyName: `${string}#${string}`,
+            replace?: boolean
+        ): void | never
 
-  // Moddle
-  export class Moddle {
-    properties: Properties
-    factory: Factory
-    registry: Registry
-    typeCache: Record<string, ModdleElement>
-    /**
-     * Returns a registered package by uri or prefix
-     *
-     * @return {Object} the package
-     */
-    getPackage: typeof Registry.prototype.getPackage
-    /**
-     * Returns a snapshot of all known packages
-     *
-     * @return {Object} the package
-     */
-    getPackages: typeof Registry.prototype.getPackages
+        addNamedProperty(p: Property, validate?: boolean): void | never
 
-    constructor(packages: Package[])
+        removeNamedProperty(p: Property): void
 
-    create(type: Descriptor | string, attrs: any): ModdleElement
+        setBodyProperty(p: Property, validate?: boolean): void | never
 
-    getType(type: string | Descriptor): DescriptorBuilder
+        setIdProperty(p: Property, validate?: boolean): void | never
 
-    createAny(name: string, nsUri: string, properties?: Properties): void
+        assertNotDefined(p: Property, name?: string): void | never
 
-    /**
-     * Returns the descriptor for an element
-     */
-    getElementDescriptor(element: ModdleElement): Descriptor
+        hasProperty(name: string): Property | undefined
 
-    /**
-     * Returns true if the given descriptor or instance
-     * represents the given type.
-     *
-     * May be applied to this, if element is omitted.
-     */
-    hasType(element: ModdleElement | string, type?: string): boolean
+        addTrait(t: DescriptorType, inherited: boolean): void
+    }
 
-    /**
-     * Returns the descriptor of an elements named property
-     */
-    getPropertyDescriptor(element: ModdleElement, property: Property): Descriptor
+    // Registry
+    export interface Package {
+        name: string
+        prefix: string
+        types: DescriptorType[]
+    }
 
-    /**
-     * Returns a mapped type's descriptor
-     */
-    getTypeDescriptor(type: string): Descriptor
-  }
+    export class Registry {
+        packageMap: Record<string, Package>
+        typeMap: Record<string, DescriptorType>
+        packages: Package[]
+        properties: Properties
 
-  export type isBuiltInType = typeof isBuiltIn
-  export type isSimpleType = typeof isSimple
-  export type parseNameNS = typeof parseName
+        constructor(packages: Package[], properties: Properties)
+
+        getPackage(uriOrPrefix: UriOrPrefix): Package
+
+        getPackages(): Package[]
+
+        registerPackage(pkg: Package): number
+
+        /**
+         * Register a type from a specific package with us
+         * @param {DescriptorType} type
+         * @param {Package} pkg
+         */
+        registerType(type: DescriptorType, pkg: Package): void
+
+        /**
+         * Traverse the type hierarchy from bottom to top,
+         * calling iterator with (type, inherited) for all elements in
+         * the inheritance chain.
+         *
+         * @param {Object} nsName
+         * @param {Function} iterator
+         * @param {Boolean} [trait=false]
+         */
+        mapTypes(nsName: Object, iterator: Function, trait?: boolean)
+
+        /**
+         * Returns the effective descriptor for a type.
+         *
+         * @param  {String} name the namespaced name (ns:localName) of the type
+         *
+         * @return {Descriptor} the resulting effective descriptor
+         */
+        getEffectiveDescriptor(name: string): DescriptorBuilder
+
+        definePackage(target: Descriptor, pkg: Package): void
+    }
+
+    //Properties
+    export class Properties {
+        model: Moddle
+
+        constructor(model: Moddle)
+
+        set(target: ModdleElement, name: string, value: any): void
+
+        get(target: ModdleElement, name: string): any
+
+        define(target: ModdleElement, name: string, options: PropertyDescriptor): void
+
+        defineDescriptor(target: Omit<ModdleElement, '$descriptor'>, descriptor: Descriptor): void
+
+        defineModel(target: Omit<ModdleElement, '$model'>, model: ModdleElement): void
+    }
+
+    // Moddle
+    export class Moddle {
+        properties: Properties
+        factory: Factory
+        registry: Registry
+        typeCache: Record<string, ModdleElement>
+        /**
+         * Returns a registered package by uri or prefix
+         *
+         * @return {Object} the package
+         */
+        getPackage: typeof Registry.prototype.getPackage
+        /**
+         * Returns a snapshot of all known packages
+         *
+         * @return {Object} the package
+         */
+        getPackages: typeof Registry.prototype.getPackages
+
+        constructor(packages: Package[])
+
+        create(type: Descriptor | string, attrs: any): ModdleElement
+
+        getType(type: string | Descriptor): DescriptorBuilder
+
+        createAny(name: string, nsUri: string, properties?: Properties): void
+
+        /**
+         * Returns the descriptor for an element
+         */
+        getElementDescriptor(element: ModdleElement): Descriptor
+
+        /**
+         * Returns true if the given descriptor or instance
+         * represents the given type.
+         *
+         * May be applied to this, if element is omitted.
+         */
+        hasType(element: ModdleElement | string, type?: string): boolean
+
+        /**
+         * Returns the descriptor of an elements named property
+         */
+        getPropertyDescriptor(element: ModdleElement, property: Property): Descriptor
+
+        /**
+         * Returns a mapped type's descriptor
+         */
+        getTypeDescriptor(type: string): Descriptor
+    }
+
+    export type isBuiltInType = typeof isBuiltIn
+    export type isSimpleType = typeof isSimple
+    export type parseNameNS = typeof parseName
 }

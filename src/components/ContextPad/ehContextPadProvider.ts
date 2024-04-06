@@ -79,8 +79,9 @@ class EhContextPadProvider extends ContextPadProvider {
 
 
         const appendMultiInstanceUserTask = (event: Event, element: Shape) => {
-            let store=modeler()
-            let bpmnFactory = store.getModeler.get('bpmnFactory') as BpmnFactory;;
+            let store = modeler()
+            let bpmnFactory = store.getModeler.get('bpmnFactory') as BpmnFactory;
+            ;
             const businessObject = bpmnFactory.create('bpmn:UserTask', {
                 // name: '多实例用户任务',
                 isForCompensation: false,
@@ -92,7 +93,7 @@ class EhContextPadProvider extends ContextPadProvider {
                 type: 'bpmn:UserTask',
                 businessObject: businessObject,
             });
-            this._create.start(event, shape, { source: element });
+            this._create.start(event, shape, {source: element});
         }
 
 

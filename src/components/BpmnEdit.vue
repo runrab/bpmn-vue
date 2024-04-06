@@ -10,8 +10,13 @@ import 'bpmn-js/dist/assets/bpmn-font/css/bpmn.css'
 import 'bpmn-js/dist/assets/bpmn-js.css'
 import 'bpmn-js/dist/assets/bpmn-font/css/bpmn-codes.css'
 import 'bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css'
-import 'bpmn-js-properties-panel/dist/assets/element-templates.css';
-import 'bpmn-js-properties-panel/dist/assets/properties-panel.css';
+// 过时
+// import 'bpmn-js-properties-panel/dist/assets/element-templates.css';
+// import 'bpmn-js-properties-panel/dist/assets/properties-panel.css';
+import 'bpmn-js-properties-panel/dist/index.js';
+// 面板样式 本地引入便于直接修改
+import '@/assets/properties-panel.css'
+
 // bpmn构建器
 import BpmnModeler from 'bpmn-js/lib/Modeler.js' // 引入 bpmn-js
 // 初始化xml
@@ -143,7 +148,7 @@ async function deployProcDefClick() {
 const curNodeInfo = reactive({
   curType: "",  // 任务类型 用户任务
   curNode: "",
-  expValue: "",//多用户和部门角色实现
+  expValue: "",//多用户和 部门 角色实现
 });
 watch(curNodeInfo, (newValue, oldValue) => {
   // 在 curNodeInfo 对象发生变化后执行相应逻辑

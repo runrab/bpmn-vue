@@ -9,13 +9,21 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "esModuleInterop": true,
-    "lib": ["ESNext", "DOM"],
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
     "skipLibCheck": true,
     "noEmit": true,
     "baseUrl": "./",
-    "types": ["didi", "min-dash"],
+    "types": [
+      "didi",
+      "min-dash"
+    ],
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": [
+        "src/*"
+      ]
     }
   },
   "include": [
@@ -25,5 +33,9 @@
     "src/**/*.vue",
     "types/editor/global.d.ts"
   ],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }

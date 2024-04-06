@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import Bpmn from './components/bpmn.vue'
+import BpmnEdit from './components/BpmnEdit.vue'
 </script>
 
 <template>
-  <Bpmn/>
+  <BpmnEdit/>
 </template>
 
 <style scoped>
