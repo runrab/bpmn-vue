@@ -27,3 +27,9 @@ npm run dev
 ```
 
 或者使用pnpm/yarn
+
+## 组件使用
+
+```shell
+pnpm install workflow-bpmn-vue 
+```
