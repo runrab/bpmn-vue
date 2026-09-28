@@ -1,0 +1,110 @@
+:root {
+  --panel-bg: #ffffff;
+  --panel-border: #e7eaf0;
+  --panel-muted: #8a94a6;
+  --panel-text: #1f2937;
+  --panel-accent: #409eff;
+  --panel-soft: #f7f9fc;
+}
+
+.properties-shell {
+  width: 360px;
+  min-width: 320px;
+  max-width: 420px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--panel-bg);
+  border-left: 1px solid var(--panel-border);
+  box-shadow: -8px 0 24px rgba(31, 41, 55, 0.05);
+  z-index: 5;
+}
+
+.properties-shell__header {
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid var(--panel-border);
+  background: linear-gradient(180deg, #fff 0%, #fbfcff 100%);
+}
+
+.properties-shell__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 650;
+  color: var(--panel-text);
+}
+
+.properties-shell__desc {
+  margin-top: 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--panel-muted);
+}
+
+#js-properties-panel {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  background: #fff;
+}
+
+#js-properties-panel .bio-properties-panel {
+  background: #fff;
+  font-family: Inter, "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+#js-properties-panel .bio-properties-panel-header {
+  border-bottom: 1px solid var(--panel-border);
+}
+
+#js-properties-panel .bio-properties-panel-group {
+  border-bottom: 1px solid #eef1f5;
+}
+
+#js-properties-panel .bio-properties-panel-group-header {
+  min-height: 46px;
+  padding: 0 16px;
+  background: #fff;
+}
+
+#js-properties-panel .bio-properties-panel-group-header:hover {
+  background: var(--panel-soft);
+}
+
+#js-properties-panel .bio-properties-panel-group-header-title {
+  margin: 0;
+  color: var(--panel-text);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+#js-properties-panel .bio-properties-panel-entry {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+#js-properties-panel .bio-properties-panel-label {
+  color: #4b5563;
+  font-size: 12px;
+}
+
+#js-properties-panel .bio-properties-panel-input,
+#js-properties-panel .bio-properties-panel-textarea,
+#js-properties-panel .bio-properties-panel-select {
+  border-radius: 8px;
+  border-color: #d9dee8;
+  min-height: 34px;
+  transition: border-color .2s, box-shadow .2s;
+}
+
+#js-properties-panel .bio-properties-panel-input:focus,
+#js-properties-panel .bio-properties-panel-textarea:focus,
+#js-properties-panel .bio-properties-panel-select:focus {
+  border-color: var(--panel-accent);
+  box-shadow: 0 0 0 3px rgba(64, 158, 255, .10);
+}
+
+@media (max-width: 960px) {
+  .properties-shell {
+    width: 320px;
+  }
+}
